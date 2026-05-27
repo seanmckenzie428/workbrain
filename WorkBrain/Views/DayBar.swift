@@ -147,7 +147,7 @@ struct CalendarPicker: View {
                                 )
                                 .foregroundStyle(
                                     isSelected ? .white :
-                                    isWeekday ? .primary : .secondary
+                                    isWeekday ? .primary : Color.gray.opacity(0.35)
                                 )
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 4)
