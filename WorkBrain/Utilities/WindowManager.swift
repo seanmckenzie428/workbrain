@@ -22,15 +22,15 @@ final class WindowManager {
         container.autoresizingMask = [.width, .height]
 
         let visualEffect = NSVisualEffectView()
-        visualEffect.material = .popover
+        visualEffect.material = .underWindowBackground
         visualEffect.blendingMode = .behindWindow
         visualEffect.state = .active
         visualEffect.autoresizingMask = [.width, .height]
 
-        // Subtle tint overlay — accent color at very low opacity everywhere
+        // Subtle tint overlay — accent color at low opacity everywhere
         let tintView = NSView()
         tintView.wantsLayer = true
-        tintView.layer?.backgroundColor = NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.04).cgColor
+        tintView.layer?.backgroundColor = NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.08).cgColor
         tintView.autoresizingMask = [.width, .height]
 
         // Subtle diagonal gradient for variation (not flat)
@@ -133,9 +133,9 @@ private class GradientAccentView: NSView {
     private func setupGradient() {
         let gradient = CAGradientLayer()
         gradient.colors = [
-            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.06).cgColor,  // #3DB64C at 6%
+            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.12).cgColor,  // #3DB64C at 12%
             NSColor.clear.cgColor,
-            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.04).cgColor   // #3DB64C at 4%
+            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.06).cgColor   // #3DB64C at 6%
         ]
         gradient.locations = [0.0, 0.5, 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)   // top-left
