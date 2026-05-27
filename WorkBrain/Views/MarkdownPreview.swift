@@ -27,28 +27,32 @@ struct MarkdownPreview: View {
             Text(String(trimmed.dropFirst(2)))
                 .font(.title2)
                 .fontWeight(.bold)
-                .padding(.top, 8)
+                .padding(.top, 12)
         } else if trimmed.hasPrefix("## ") {
             Text(String(trimmed.dropFirst(3)))
                 .font(.title3)
                 .fontWeight(.bold)
-                .padding(.top, 6)
+                .padding(.top, 10)
         } else if trimmed.hasPrefix("### ") {
             Text(String(trimmed.dropFirst(4)))
                 .font(.headline)
                 .fontWeight(.bold)
-                .padding(.top, 4)
+                .padding(.top, 8)
         } else if trimmed.hasPrefix("- [ ] ") {
             Text("☐ " + String(trimmed.dropFirst(6)))
+                .font(.callout)
         } else if trimmed.hasPrefix("- [x] ") || trimmed.hasPrefix("- [X] ") {
             Text("☑ " + String(trimmed.dropFirst(6)))
+                .font(.callout)
         } else if trimmed.hasPrefix("- ") {
             Text("• " + String(trimmed.dropFirst(2)))
+                .font(.callout)
         } else if trimmed.isEmpty {
             Text(" ")
-                .font(.system(size: 4))
+                .font(.system(size: 6))
         } else {
             Text(trimmed)
+                .font(.callout)
         }
     }
 }
