@@ -63,6 +63,7 @@ private struct DayPill: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 4)
+        .contentShape(Rectangle())
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(isSelected ? Color.accentColor : Color.clear)
