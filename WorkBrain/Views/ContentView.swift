@@ -63,6 +63,9 @@ struct ContentView: View {
         .onAppear {
             viewModel.configure(modelContext: modelContext)
         }
+        .onChange(of: viewModel.noteContent) { _, _ in
+            viewModel.onNoteContentChange()
+        }
         .onChange(of: viewModel.opacity) { _, opacity in
             WindowManager.shared.setOpacity(opacity)
         }
