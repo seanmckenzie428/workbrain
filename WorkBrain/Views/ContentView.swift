@@ -4,7 +4,6 @@ import SwiftData
 struct ContentView: View {
     @StateObject private var viewModel = MainViewModel()
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.colorScheme) private var systemColorScheme
 
     var body: some View {
         VStack(spacing: 0) {
@@ -31,12 +30,13 @@ struct ContentView: View {
             BottomBar(
                 isPinned: $viewModel.isPinned,
                 opacity: $viewModel.opacity,
-                appearance: $viewModel.appearance
+                appearance: $viewModel.appearance,
+                isClickThrough: $viewModel.isClickThrough
             )
         }
-        .background(.ultraThinMaterial)
+        .background(.ultraThinMaterial.opacity(viewModel.opacity))
         .preferredColorScheme(viewModel.appearance.preferredColorScheme)
-        .opacity(viewModel.opacity)
+        .environment(\.viewModelOpacity, viewModel.opacity)
         .onAppear {
             viewModel.configure(modelContext: modelContext)
         }
@@ -46,16 +46,20 @@ struct ContentView: View {
         .onChange(of: viewModel.isPinned) { _, pinned in
             setWindowFloating(pinned)
         }
+        .onChange(of: viewModel.isClickThrough) { _, clickThrough in
+            setWindowClickThrough(clickThrough)
+        }
     }
 
     // MARK: - Window Manipulation
 
     private func setWindowFloating(_ floating: Bool) {
         guard let window = NSApplication.shared.keyWindow else { return }
-        if floating {
-            window.level = .floating
-        } else {
-            window.level = .normal
-        }
+        window.level = floating ? .floating : .normal
+    }
+
+    private func setWindowClickThrough(_ clickThrough: Bool) {
+        guard let window = NSApplication.shared.keyWindow else { return }
+        window.ignoresMouseEvents = clickThrough
     }
 }
