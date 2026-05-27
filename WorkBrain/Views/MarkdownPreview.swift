@@ -26,15 +26,15 @@ struct MarkdownPreview: View {
         if trimmed.hasPrefix("# ") {
             Text(String(trimmed.dropFirst(2)))
                 .font(.system(size: 17, weight: .bold))
-                .padding(.top, 12)
+                .padding(.top, 4)
         } else if trimmed.hasPrefix("## ") {
             Text(String(trimmed.dropFirst(3)))
                 .font(.system(size: 15, weight: .bold))
-                .padding(.top, 10)
+                .padding(.top, 4)
         } else if trimmed.hasPrefix("### ") {
             Text(String(trimmed.dropFirst(4)))
                 .font(.system(size: 14, weight: .bold))
-                .padding(.top, 8)
+                .padding(.top, 2)
         } else if trimmed.hasPrefix("- [ ] ") {
             Text("☐ " + String(trimmed.dropFirst(6)))
                 .font(.system(size: 14))

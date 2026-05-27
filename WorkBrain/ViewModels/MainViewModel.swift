@@ -9,8 +9,16 @@ final class MainViewModel: ObservableObject {
     @Published var selectedDate: Date = Date()
     @Published var noteContent: String = ""
     @Published var isPinned: Bool = false
-    @Published var opacity: Double = 0.95
-    @Published var appearance: AppAppearance = .system
+    @Published var opacity: Double = UserDefaults.standard.double(forKey: "workbrain.opacity") > 0 ? UserDefaults.standard.double(forKey: "workbrain.opacity") : 0.95 {
+        didSet {
+            UserDefaults.standard.setValue(opacity, forKey: "workbrain.opacity")
+        }
+    }
+    @Published var appearance: AppAppearance = AppAppearance(rawValue: UserDefaults.standard.string(forKey: "workbrain.appearance") ?? "") ?? .system {
+        didSet {
+            UserDefaults.standard.setValue(appearance.rawValue, forKey: "workbrain.appearance")
+        }
+    }
     @Published var isClickThrough: Bool = false
 
     // MARK: - Persistence
