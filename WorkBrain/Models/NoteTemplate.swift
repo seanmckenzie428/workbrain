@@ -16,10 +16,21 @@ final class NoteTemplate {
     /// Default template applied to every new daily note.
     static var `default`: String {
         """
-        ## Tasks
-        - [ ] 
+        # {date}
+
+        ## Goals
+
+
+        ## First tiny step
+
+
+        ## When lost, return to
+
 
         ## Notes
+
+
+        ## Completed
 
         """
     }

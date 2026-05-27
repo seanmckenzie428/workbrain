@@ -45,7 +45,6 @@ struct ContentView: View {
             WindowManager.shared.setup(for: window)
             WindowManager.shared.setOpacity(viewModel.opacity)
             WindowManager.shared.setFloating(viewModel.isPinned)
-            WindowManager.shared.updateMaterial(for: effectiveColorScheme)
         })
         .onAppear {
             viewModel.configure(modelContext: modelContext)
@@ -58,14 +57,6 @@ struct ContentView: View {
         }
         .onChange(of: viewModel.isClickThrough) { _, clickThrough in
             WindowManager.shared.setClickThrough(clickThrough)
-        }
-        .onChange(of: viewModel.appearance) { _, _ in
-            WindowManager.shared.updateMaterial(for: effectiveColorScheme)
-        }
-        .onChange(of: colorScheme) { _, _ in
-            if viewModel.appearance == .system {
-                WindowManager.shared.updateMaterial(for: effectiveColorScheme)
-            }
         }
     }
 }

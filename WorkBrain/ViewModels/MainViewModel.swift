@@ -12,7 +12,6 @@ final class MainViewModel: ObservableObject {
     @Published var opacity: Double = 0.95
     @Published var appearance: AppAppearance = .system
     @Published var isClickThrough: Bool = false
-    @Published var showCalendar: Bool = false
 
     // MARK: - Persistence
 
@@ -61,9 +60,9 @@ final class MainViewModel: ObservableObject {
         )
 
         if let existing = try? ctx.fetch(descriptor).first {
-            noteContent = stripTitleHeader(existing.content)
+            noteContent = existing.content
         } else {
-            let templateContent = fetchTemplateContent()
+            let templateContent = fetchTemplateContent(for: normalized)
             let note = DailyNote(date: normalized, content: templateContent)
             ctx.insert(note)
             try? ctx.save()
@@ -86,18 +85,19 @@ final class MainViewModel: ObservableObject {
         }
     }
 
-    private func fetchTemplateContent() -> String {
+    private func fetchTemplateContent(for date: Date) -> String {
+        let base = fetchStoredTemplate()
+        return base.replacingOccurrences(
+            of: "{date}",
+            with: DateUtils.isoDateString(date)
+        )
+    }
+
+    private func fetchStoredTemplate() -> String {
         guard let ctx = modelContext else { return NoteTemplate.default }
 
         let descriptor = FetchDescriptor<NoteTemplate>()
         if let template = try? ctx.fetch(descriptor).first {
-            // Migrate old templates that had # {date} header
-            if template.content.contains("# {date}") || template.content.contains("{date}") {
-                template.content = NoteTemplate.default
-                template.updatedAt = Date()
-                try? ctx.save()
-                return NoteTemplate.default
-            }
             return template.content
         }
 
@@ -105,14 +105,6 @@ final class MainViewModel: ObservableObject {
         ctx.insert(template)
         try? ctx.save()
         return template.content
-    }
-
-    /// Strip legacy `# YYYY-MM-DD` header from old notes.
-    private func stripTitleHeader(_ content: String) -> String {
-        let lines = content.split(separator: "\n", omittingEmptySubsequences: false)
-        guard let first = lines.first, first.hasPrefix("# ") else { return content }
-        let rest = lines.dropFirst().joined(separator: "\n")
-        return rest.isEmpty ? content : rest
     }
 }
 
