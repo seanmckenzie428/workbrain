@@ -16,13 +16,15 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            DayBar(
-                days: viewModel.weekdayBar,
-                selectedDate: viewModel.selectedDate,
-                onSelect: { viewModel.selectDate($0) }
-            )
+            if !viewModel.isClickThrough {
+                DayBar(
+                    days: viewModel.weekdayBar,
+                    selectedDate: viewModel.selectedDate,
+                    onSelect: { viewModel.selectDate($0) }
+                )
 
-            Divider()
+                Divider()
+            }
 
             NoteEditor(
                 content: $viewModel.noteContent,
@@ -30,14 +32,16 @@ struct ContentView: View {
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            Divider()
+            if !viewModel.isClickThrough {
+                Divider()
 
-            BottomBar(
-                isPinned: $viewModel.isPinned,
-                opacity: $viewModel.opacity,
-                appearance: $viewModel.appearance,
-                isClickThrough: $viewModel.isClickThrough
-            )
+                BottomBar(
+                    isPinned: $viewModel.isPinned,
+                    opacity: $viewModel.opacity,
+                    appearance: $viewModel.appearance,
+                    isClickThrough: $viewModel.isClickThrough
+                )
+            }
         }
         .background(.clear)
         .preferredColorScheme(viewModel.appearance.preferredColorScheme)
