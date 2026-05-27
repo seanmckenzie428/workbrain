@@ -49,6 +49,7 @@ struct ContentView: View {
             WindowManager.shared.setup(for: window)
             WindowManager.shared.setOpacity(viewModel.opacity)
             WindowManager.shared.setFloating(viewModel.isPinned)
+            WindowManager.shared.setClickThrough(viewModel.isClickThrough)
         })
         .onAppear {
             viewModel.configure(modelContext: modelContext)
@@ -61,6 +62,17 @@ struct ContentView: View {
         }
         .onChange(of: viewModel.isClickThrough) { _, clickThrough in
             WindowManager.shared.setClickThrough(clickThrough)
+        }
+        // Auto click-through: lose focus → ON, gain focus → OFF
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didResignKeyNotification)) { _ in
+            withAnimation(.easeInOut(duration: 0.2)) {
+                viewModel.isClickThrough = true
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didBecomeKeyNotification)) { _ in
+            withAnimation(.easeInOut(duration: 0.2)) {
+                viewModel.isClickThrough = false
+            }
         }
     }
 }

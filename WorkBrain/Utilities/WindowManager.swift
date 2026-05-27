@@ -43,6 +43,7 @@ final class WindowManager {
 
         self.backgroundWindow = bgWindow
 
+        // Frame sync
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(syncFrame),
