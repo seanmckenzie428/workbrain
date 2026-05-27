@@ -115,11 +115,12 @@ struct CalendarPicker: View {
                 .buttonStyle(.plain)
             }
 
-            // Weekday headers
-            let weekdaySymbols = calendar.veryShortWeekdaySymbols
+            // Weekday headers — reorder to Monday-first for ISO 8601
+            let rawSymbols = calendar.veryShortWeekdaySymbols
+            let mondayFirstSymbols = Array(rawSymbols.dropFirst()) + [rawSymbols.first!] // Mon..Sat, Sun
             HStack(spacing: 4) {
-                ForEach(weekdaySymbols.indices, id: \.self) { i in
-                    Text(weekdaySymbols[i])
+                ForEach(mondayFirstSymbols.indices, id: \.self) { i in
+                    Text(mondayFirstSymbols[i])
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity)
