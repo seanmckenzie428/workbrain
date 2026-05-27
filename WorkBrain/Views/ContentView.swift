@@ -4,6 +4,7 @@ import SwiftData
 struct ContentView: View {
     @ObservedObject var viewModel: MainViewModel
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         VStack(spacing: 0) {
@@ -33,7 +34,7 @@ struct ContentView: View {
                 isClickThrough: $viewModel.isClickThrough
             )
         }
-        .background(.ultraThinMaterial)
+        .background(translucentBackground.opacity(viewModel.opacity))
         .preferredColorScheme(viewModel.appearance.preferredColorScheme)
         .onAppear {
             viewModel.configure(modelContext: modelContext)
@@ -45,10 +46,27 @@ struct ContentView: View {
         .onChange(of: viewModel.isClickThrough) { _, clickThrough in
             setWindowClickThrough(clickThrough)
         }
-        .onChange(of: viewModel.opacity) { _, opacity in
-            withAnimation(.easeInOut(duration: 0.15)) {
-                setWindowOpacity(opacity)
-            }
+    }
+
+    // MARK: - Translucent Background
+
+    private var translucentBackground: Color {
+        switch effectiveColorScheme {
+        case .dark:
+            return Color(white: 0.12)
+        default:
+            return Color(white: 0.95)
+        }
+    }
+
+    private var effectiveColorScheme: ColorScheme {
+        switch viewModel.appearance {
+        case .system:
+            return colorScheme
+        case .light:
+            return .light
+        case .dark:
+            return .dark
         }
     }
 
@@ -59,7 +77,6 @@ struct ContentView: View {
         window.isOpaque = false
         window.backgroundColor = .clear
         window.hasShadow = true
-        setWindowOpacity(viewModel.opacity)
         setWindowFloating(viewModel.isPinned)
         setWindowClickThrough(viewModel.isClickThrough)
     }
@@ -72,10 +89,5 @@ struct ContentView: View {
     private func setWindowClickThrough(_ clickThrough: Bool) {
         guard let window = NSApplication.shared.keyWindow else { return }
         window.ignoresMouseEvents = clickThrough
-    }
-
-    private func setWindowOpacity(_ opacity: Double) {
-        guard let window = NSApplication.shared.keyWindow else { return }
-        window.alphaValue = opacity
     }
 }
