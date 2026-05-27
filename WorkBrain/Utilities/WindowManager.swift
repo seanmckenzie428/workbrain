@@ -15,14 +15,23 @@ final class WindowManager {
         backgroundWindow?.close()
         self.contentWindow = contentWindow
 
+        let container = NSView()
+        container.wantsLayer = true
+        container.layer?.cornerRadius = 10
+        container.layer?.masksToBounds = true
+        container.autoresizingMask = [.width, .height]
+
         let visualEffect = NSVisualEffectView()
         visualEffect.material = .popover
         visualEffect.blendingMode = .behindWindow
         visualEffect.state = .active
-        visualEffect.wantsLayer = true
-        visualEffect.layer?.cornerRadius = 10
-        visualEffect.layer?.masksToBounds = true
         visualEffect.autoresizingMask = [.width, .height]
+
+        let gradientView = GradientAccentView()
+        gradientView.autoresizingMask = [.width, .height]
+
+        container.addSubview(visualEffect)
+        container.addSubview(gradientView)
 
         let bgWindow = NSWindow(
             contentRect: contentWindow.frame,
@@ -33,7 +42,7 @@ final class WindowManager {
         bgWindow.isOpaque = false
         bgWindow.backgroundColor = .clear
         bgWindow.hasShadow = false
-        bgWindow.contentView = visualEffect
+        bgWindow.contentView = container
         bgWindow.level = contentWindow.level
         bgWindow.alphaValue = storedOpacity
 
@@ -95,5 +104,37 @@ final class WindowManager {
         for type in buttons {
             window.standardWindowButton(type)?.isHidden = hidden
         }
+    }
+}
+
+// MARK: - Gradient Accent View
+
+private class GradientAccentView: NSView {
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
+        wantsLayer = true
+        setupGradient()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        wantsLayer = true
+        setupGradient()
+    }
+
+    private func setupGradient() {
+        let gradient = CAGradientLayer()
+        gradient.type = .radial
+        gradient.colors = [
+            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.12).cgColor,  // #3DB64C at 12%
+            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.04).cgColor,  // #3DB64C at 4%
+            NSColor.clear.cgColor
+        ]
+        gradient.locations = [0.0, 0.5, 1.0]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradient.frame = bounds
+        gradient.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        layer?.addSublayer(gradient)
     }
 }
