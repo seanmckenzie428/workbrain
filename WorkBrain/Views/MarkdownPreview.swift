@@ -25,31 +25,31 @@ struct MarkdownPreview: View {
 
         if trimmed.hasPrefix("# ") {
             Text(String(trimmed.dropFirst(2)))
-                .font(.system(size: 20, weight: .bold))
+                .font(.system(size: 17, weight: .bold))
                 .padding(.top, 12)
         } else if trimmed.hasPrefix("## ") {
             Text(String(trimmed.dropFirst(3)))
-                .font(.system(size: 18, weight: .bold))
+                .font(.system(size: 15, weight: .bold))
                 .padding(.top, 10)
         } else if trimmed.hasPrefix("### ") {
             Text(String(trimmed.dropFirst(4)))
-                .font(.system(size: 16, weight: .bold))
+                .font(.system(size: 14, weight: .bold))
                 .padding(.top, 8)
         } else if trimmed.hasPrefix("- [ ] ") {
             Text("☐ " + String(trimmed.dropFirst(6)))
-                .font(.system(size: 16))
+                .font(.system(size: 14))
         } else if trimmed.hasPrefix("- [x] ") || trimmed.hasPrefix("- [X] ") {
             Text("☑ " + String(trimmed.dropFirst(6)))
-                .font(.system(size: 16))
+                .font(.system(size: 14))
         } else if trimmed.hasPrefix("- ") {
             Text("• " + String(trimmed.dropFirst(2)))
-                .font(.system(size: 16))
+                .font(.system(size: 14))
         } else if trimmed.isEmpty {
             Text(" ")
                 .font(.system(size: 6))
         } else {
             Text(trimmed)
-                .font(.system(size: 16))
+                .font(.system(size: 14))
         }
     }
 }
