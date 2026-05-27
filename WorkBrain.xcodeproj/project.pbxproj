@@ -11,6 +11,7 @@
 		2B8793225A293E0BF3658DFB /* WorkBrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2462E8D5A64C52AE3BB239 /* WorkBrainApp.swift */; };
 		34941F6180BFB5D7A7806A4F /* DayBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29626346BB770F624F2899EB /* DayBar.swift */; };
 		349B4D30FFC54666D3D5CA53 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A9646108081AE5ED28483E /* MainViewModel.swift */; };
+		404BC8159E366B75A7A45D84 /* MarkdownPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4A5869F8D2FA988C3C5BA /* MarkdownPreview.swift */; };
 		55B4A805F11CD9A91B0877BA /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5A07A57839331058523F4 /* NoteEditor.swift */; };
 		587F4D123A989C39F3E59B3F /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE8AFB7C3CEAB6A676FBC2B /* DateUtils.swift */; };
 		63A12E517DD987AAD9A1D5F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DFA7511DCB7CC3763D59DEB /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		58B51A5C0CAB49F12611AEF8 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		61E3541924AAAAE397526DCD /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		86EEA125AE488215F7C9DCF0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8CB4A5869F8D2FA988C3C5BA /* MarkdownPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownPreview.swift; sourceTree = "<group>"; };
 		8CE8AFB7C3CEAB6A676FBC2B /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		D4326DD724BD24257858B426 /* DailyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNote.swift; sourceTree = "<group>"; };
 		E87502BADC331AA9A61C8DF9 /* WorkBrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkBrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +77,7 @@
 				61E3541924AAAAE397526DCD /* BottomBar.swift */,
 				86EEA125AE488215F7C9DCF0 /* ContentView.swift */,
 				29626346BB770F624F2899EB /* DayBar.swift */,
+				8CB4A5869F8D2FA988C3C5BA /* MarkdownPreview.swift */,
 				56F5A07A57839331058523F4 /* NoteEditor.swift */,
 			);
 			path = Views;
@@ -185,6 +188,7 @@
 				587F4D123A989C39F3E59B3F /* DateUtils.swift in Sources */,
 				34941F6180BFB5D7A7806A4F /* DayBar.swift in Sources */,
 				349B4D30FFC54666D3D5CA53 /* MainViewModel.swift in Sources */,
+				404BC8159E366B75A7A45D84 /* MarkdownPreview.swift in Sources */,
 				55B4A805F11CD9A91B0877BA /* NoteEditor.swift in Sources */,
 				D41CFED615EE94464476A590 /* NoteTemplate.swift in Sources */,
 				C3409E4C3537E438314E5708 /* WindowManager.swift in Sources */,

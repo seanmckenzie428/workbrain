@@ -26,11 +26,16 @@ struct ContentView: View {
                 Divider()
             }
 
-            NoteEditor(
-                content: $viewModel.noteContent,
-                date: viewModel.selectedDate
-            )
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            if viewModel.isClickThrough {
+                MarkdownPreview(content: viewModel.noteContent)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                NoteEditor(
+                    content: $viewModel.noteContent,
+                    date: viewModel.selectedDate
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
 
             if !viewModel.isClickThrough {
                 Divider()
