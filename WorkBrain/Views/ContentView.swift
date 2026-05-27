@@ -6,41 +6,34 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
 
     var body: some View {
-        ZStack {
-            // Background layer — only thing that fades
-            Rectangle()
-                .fill(.ultraThinMaterial)
-                .opacity(viewModel.opacity)
+        VStack(spacing: 0) {
+            // Day bar
+            DayBar(
+                days: viewModel.weekdayBar,
+                selectedDate: viewModel.selectedDate,
+                onSelect: { viewModel.selectDate($0) }
+            )
 
-            // Content layer — always full opacity
-            VStack(spacing: 0) {
-                // Day bar
-                DayBar(
-                    days: viewModel.weekdayBar,
-                    selectedDate: viewModel.selectedDate,
-                    onSelect: { viewModel.selectDate($0) }
-                )
+            Divider()
 
-                Divider()
+            // Note editor
+            NoteEditor(
+                content: $viewModel.noteContent,
+                date: viewModel.selectedDate
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                // Note editor
-                NoteEditor(
-                    content: $viewModel.noteContent,
-                    date: viewModel.selectedDate
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            Divider()
 
-                Divider()
-
-                // Bottom bar
-                BottomBar(
-                    isPinned: $viewModel.isPinned,
-                    opacity: $viewModel.opacity,
-                    appearance: $viewModel.appearance,
-                    isClickThrough: $viewModel.isClickThrough
-                )
-            }
+            // Bottom bar
+            BottomBar(
+                isPinned: $viewModel.isPinned,
+                opacity: $viewModel.opacity,
+                appearance: $viewModel.appearance,
+                isClickThrough: $viewModel.isClickThrough
+            )
         }
+        .background(.ultraThinMaterial)
         .preferredColorScheme(viewModel.appearance.preferredColorScheme)
         .onAppear {
             viewModel.configure(modelContext: modelContext)
@@ -52,6 +45,11 @@ struct ContentView: View {
         .onChange(of: viewModel.isClickThrough) { _, clickThrough in
             setWindowClickThrough(clickThrough)
         }
+        .onChange(of: viewModel.opacity) { _, opacity in
+            withAnimation(.easeInOut(duration: 0.15)) {
+                setWindowOpacity(opacity)
+            }
+        }
     }
 
     // MARK: - Window Configuration
@@ -61,7 +59,7 @@ struct ContentView: View {
         window.isOpaque = false
         window.backgroundColor = .clear
         window.hasShadow = true
-        window.alphaValue = 1.0  // Window stays fully opaque; material layer handles fade
+        setWindowOpacity(viewModel.opacity)
         setWindowFloating(viewModel.isPinned)
         setWindowClickThrough(viewModel.isClickThrough)
     }
@@ -74,5 +72,10 @@ struct ContentView: View {
     private func setWindowClickThrough(_ clickThrough: Bool) {
         guard let window = NSApplication.shared.keyWindow else { return }
         window.ignoresMouseEvents = clickThrough
+    }
+
+    private func setWindowOpacity(_ opacity: Double) {
+        guard let window = NSApplication.shared.keyWindow else { return }
+        window.alphaValue = opacity
     }
 }
