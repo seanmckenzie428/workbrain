@@ -7,7 +7,10 @@ final class WindowManager {
 
     private weak var contentWindow: NSWindow?
     private var backgroundWindow: NSWindow?
+    private var visualEffectView: NSVisualEffectView?
+    private var extraBlurView: NSVisualEffectView?
     private var storedOpacity: Double = 0.95
+    private var isFocused: Bool = true
 
     func setup(for contentWindow: NSWindow) {
         guard self.contentWindow !== contentWindow || backgroundWindow == nil else { return }
@@ -22,22 +25,33 @@ final class WindowManager {
         container.autoresizingMask = [.width, .height]
 
         let visualEffect = NSVisualEffectView()
-        visualEffect.material = .underWindowBackground
+        visualEffect.material = .contentBackground
         visualEffect.blendingMode = .behindWindow
         visualEffect.state = .active
         visualEffect.autoresizingMask = [.width, .height]
+        self.visualEffectView = visualEffect
 
-        // Subtle tint overlay — accent color at low opacity everywhere
+        // Extra blur layer — hidden by default, shown when unfocused
+        let extraBlur = NSVisualEffectView()
+        extraBlur.material = .contentBackground
+        extraBlur.blendingMode = .withinWindow
+        extraBlur.state = .active
+        extraBlur.autoresizingMask = [.width, .height]
+        extraBlur.isHidden = true
+        self.extraBlurView = extraBlur
+
+        // Subtle tint overlay
         let tintView = NSView()
         tintView.wantsLayer = true
-        tintView.layer?.backgroundColor = NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.08).cgColor
+        tintView.layer?.backgroundColor = NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.12).cgColor
         tintView.autoresizingMask = [.width, .height]
 
-        // Subtle diagonal gradient for variation (not flat)
+        // Diagonal gradient for variation
         let gradientView = GradientAccentView()
         gradientView.autoresizingMask = [.width, .height]
 
         container.addSubview(visualEffect)
+        container.addSubview(extraBlur)
         container.addSubview(tintView)
         container.addSubview(gradientView)
 
@@ -60,7 +74,6 @@ final class WindowManager {
 
         self.backgroundWindow = bgWindow
 
-        // Frame sync
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(syncFrame),
@@ -75,6 +88,7 @@ final class WindowManager {
         )
 
         syncFrame()
+        applyFocusState()
     }
 
     @objc private func syncFrame() {
@@ -84,7 +98,7 @@ final class WindowManager {
 
     func setOpacity(_ opacity: Double) {
         storedOpacity = opacity
-        backgroundWindow?.alphaValue = opacity
+        applyFocusState()
     }
 
     func setFloating(_ floating: Bool) {
@@ -94,27 +108,30 @@ final class WindowManager {
     }
 
     func setClickThrough(_ clickThrough: Bool) {
+        isFocused = !clickThrough
         contentWindow?.ignoresMouseEvents = clickThrough
         backgroundWindow?.ignoresMouseEvents = clickThrough
         setWindowButtonsHidden(clickThrough)
-        updateFocusState(isFocused: !clickThrough)
-    }
-
-    private func updateFocusState(isFocused: Bool) {
-        guard let visualEffect = backgroundWindow?.contentView?.subviews.first(where: { $0 is NSVisualEffectView }) as? NSVisualEffectView else { return }
-
-        if isFocused {
-            visualEffect.material = .fullScreenUI
-            backgroundWindow?.alphaValue = storedOpacity * 0.85
-        } else {
-            visualEffect.material = .underPageBackground
-            backgroundWindow?.alphaValue = storedOpacity
-        }
+        applyFocusState()
     }
 
     func setAppearance(_ colorScheme: ColorScheme) {
         let appearanceName: NSAppearance.Name = colorScheme == .dark ? .darkAqua : .aqua
         backgroundWindow?.appearance = NSAppearance(named: appearanceName)
+    }
+
+    // MARK: - Focus State
+
+    private func applyFocusState() {
+        if isFocused {
+            // Focused: nearly opaque — easy to read and work with
+            extraBlurView?.isHidden = true
+            backgroundWindow?.alphaValue = 0.98
+        } else {
+            // Unfocused: user-controlled transparency for see-through
+            extraBlurView?.isHidden = true
+            backgroundWindow?.alphaValue = storedOpacity
+        }
     }
 
     // MARK: - Window Buttons
@@ -146,13 +163,13 @@ private class GradientAccentView: NSView {
     private func setupGradient() {
         let gradient = CAGradientLayer()
         gradient.colors = [
-            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.18).cgColor,  // #3DB64C at 18%
+            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.18).cgColor,
             NSColor.clear.cgColor,
-            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.10).cgColor   // #3DB64C at 10%
+            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.10).cgColor
         ]
         gradient.locations = [0.0, 0.5, 1.0]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)   // top-left
-        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)     // bottom-right
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
         gradient.frame = bounds
         gradient.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
         layer?.addSublayer(gradient)
