@@ -91,6 +91,13 @@ final class MainViewModel: ObservableObject {
 
         let descriptor = FetchDescriptor<NoteTemplate>()
         if let template = try? ctx.fetch(descriptor).first {
+            // Migrate old templates that had # {date} header
+            if template.content.contains("# {date}") || template.content.contains("{date}") {
+                template.content = NoteTemplate.default
+                template.updatedAt = Date()
+                try? ctx.save()
+                return NoteTemplate.default
+            }
             return template.content
         }
 

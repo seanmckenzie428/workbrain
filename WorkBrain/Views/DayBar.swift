@@ -55,17 +55,17 @@ private struct DayPill: View {
             Text(dayName)
                 .font(.caption2)
                 .textCase(.uppercase)
-                .foregroundStyle(isSelected ? .white : .secondary)
+                .foregroundStyle(isSelected ? .white : .primary)
             Text(dayNumber)
                 .font(.title3)
-                .fontWeight(isSelected ? .bold : .regular)
+                .fontWeight(isSelected ? .bold : .medium)
                 .foregroundStyle(isSelected ? .white : .primary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 6)
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(isSelected ? Color.accentColor : Color.clear)
+                .fill(isSelected ? Color.accentColor : Color.gray.opacity(0.12))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 10)
@@ -118,7 +118,6 @@ struct CalendarPicker: View {
             let weekdaySymbols = calendar.veryShortWeekdaySymbols
             HStack(spacing: 4) {
                 ForEach(weekdaySymbols.indices, id: \.self) { i in
-                    // Reorder: iso8601 Monday=0, but veryShortWeekdaySymbols is Sun-indexed
                     Text(weekdaySymbols[i])
                         .font(.caption2)
                         .foregroundStyle(.secondary)
@@ -191,10 +190,8 @@ struct CalendarPicker: View {
         }
 
         let firstWeekday = calendar.component(.weekday, from: monthStart)
-        // Offset for Monday-start: Mon=0, Tue=1, ..., Sun=6
-        // Calendar.weekday: Sun=1, Mon=2, ..., Sat=7
-        var offset = firstWeekday - 2 // shift so Mon=0
-        if offset < 0 { offset = 6 } // Sunday wraps to 6
+        var offset = firstWeekday - 2
+        if offset < 0 { offset = 6 }
 
         var days: [Date?] = Array(repeating: nil, count: offset)
         for day in range {
@@ -202,7 +199,6 @@ struct CalendarPicker: View {
                 days.append(date)
             }
         }
-        // Pad to full weeks
         while days.count % 7 != 0 {
             days.append(nil)
         }

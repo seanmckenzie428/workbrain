@@ -7,37 +7,40 @@ struct BottomBar: View {
     @Binding var isClickThrough: Bool
 
     var body: some View {
-        HStack(spacing: 16) {
-            // Pin toggle
+        HStack(spacing: 20) {
+            // Pin toggle — icon only
             Button {
                 isPinned.toggle()
             } label: {
-                Label(isPinned ? "Unpin" : "Pin",
-                      systemImage: isPinned ? "pin.fill" : "pin")
+                Image(systemName: isPinned ? "pin.fill" : "pin")
                     .font(.subheadline)
             }
             .buttonStyle(.plain)
             .foregroundStyle(isPinned ? Color.accentColor : .secondary)
+            .help(isPinned ? "Unpin window" : "Pin window on top")
 
-            // Click-through toggle
+            // Click-through toggle — icon only
             Button {
                 isClickThrough.toggle()
             } label: {
-                Label("Click-through",
-                      systemImage: isClickThrough ? "hand.raised.fill" : "hand.raised")
+                Image(systemName: isClickThrough ? "hand.raised.fill" : "hand.raised")
                     .font(.subheadline)
             }
             .buttonStyle(.plain)
             .foregroundStyle(isClickThrough ? Color.accentColor : .secondary)
-            .help("When on, clicks pass through to apps behind this window")
+            .help("Toggle click-through (Cmd+T)")
+            .keyboardShortcut("t", modifiers: .command)
+
+            Divider()
+                .frame(height: 20)
 
             // Opacity slider
             HStack(spacing: 8) {
-                Text("Opacity")
-                    .font(.caption)
+                Image(systemName: "circle.lefthalf.filled")
+                    .font(.caption2)
                     .foregroundStyle(.secondary)
                 Slider(value: $opacity, in: 0.1...1.0, step: 0.05)
-                    .frame(width: 120)
+                    .frame(width: 100)
                 Text("\(Int(opacity * 100))%")
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -62,6 +65,7 @@ struct BottomBar: View {
             }
             .buttonStyle(.plain)
             .foregroundStyle(.secondary)
+            .help("Appearance")
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)

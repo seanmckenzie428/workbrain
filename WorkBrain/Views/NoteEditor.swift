@@ -8,6 +8,7 @@ struct NoteEditor: View {
         TextEditor(text: $content)
             .font(.system(.body, design: .monospaced))
             .scrollContentBackground(.hidden)
+            .background(.clear)
             .padding(12)
     }
 }
