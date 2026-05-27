@@ -15,6 +15,7 @@
 		587F4D123A989C39F3E59B3F /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE8AFB7C3CEAB6A676FBC2B /* DateUtils.swift */; };
 		63A12E517DD987AAD9A1D5F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DFA7511DCB7CC3763D59DEB /* Assets.xcassets */; };
 		824C988A5FBC0F3C878F8D9C /* DailyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4326DD724BD24257858B426 /* DailyNote.swift */; };
+		C3409E4C3537E438314E5708 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B51A5C0CAB49F12611AEF8 /* WindowManager.swift */; };
 		D41CFED615EE94464476A590 /* NoteTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FFCBE68B4C79A9727B8412 /* NoteTemplate.swift */; };
 		E76794793DE9CB6145D82C8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EEA125AE488215F7C9DCF0 /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +27,7 @@
 		466D6821A27D049F38DCDF9D /* WorkBrain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorkBrain.entitlements; sourceTree = "<group>"; };
 		4B2462E8D5A64C52AE3BB239 /* WorkBrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkBrainApp.swift; sourceTree = "<group>"; };
 		56F5A07A57839331058523F4 /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
+		58B51A5C0CAB49F12611AEF8 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		61E3541924AAAAE397526DCD /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		86EEA125AE488215F7C9DCF0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8CE8AFB7C3CEAB6A676FBC2B /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				8CE8AFB7C3CEAB6A676FBC2B /* DateUtils.swift */,
+				58B51A5C0CAB49F12611AEF8 /* WindowManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				349B4D30FFC54666D3D5CA53 /* MainViewModel.swift in Sources */,
 				55B4A805F11CD9A91B0877BA /* NoteEditor.swift in Sources */,
 				D41CFED615EE94464476A590 /* NoteTemplate.swift in Sources */,
+				C3409E4C3537E438314E5708 /* WindowManager.swift in Sources */,
 				2B8793225A293E0BF3658DFB /* WorkBrainApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

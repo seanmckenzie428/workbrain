@@ -4,10 +4,18 @@ import SwiftData
 struct ContentView: View {
     @ObservedObject var viewModel: MainViewModel
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.colorScheme) private var colorScheme
+
+    private var effectiveColorScheme: ColorScheme {
+        switch viewModel.appearance {
+        case .system: return colorScheme
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
 
     var body: some View {
         VStack(spacing: 0) {
-            // Day bar
             DayBar(
                 days: viewModel.weekdayBar,
                 selectedDate: viewModel.selectedDate,
@@ -16,7 +24,6 @@ struct ContentView: View {
 
             Divider()
 
-            // Note editor
             NoteEditor(
                 content: $viewModel.noteContent,
                 date: viewModel.selectedDate
@@ -25,7 +32,6 @@ struct ContentView: View {
 
             Divider()
 
-            // Bottom bar
             BottomBar(
                 isPinned: $viewModel.isPinned,
                 opacity: $viewModel.opacity,
@@ -33,49 +39,51 @@ struct ContentView: View {
                 isClickThrough: $viewModel.isClickThrough
             )
         }
-        .background(.ultraThinMaterial)
+        .background(.clear)
         .preferredColorScheme(viewModel.appearance.preferredColorScheme)
+        .background(WindowFinder { window in
+            WindowManager.shared.setup(for: window)
+            WindowManager.shared.setOpacity(viewModel.opacity)
+            WindowManager.shared.setFloating(viewModel.isPinned)
+            WindowManager.shared.updateMaterial(for: effectiveColorScheme)
+        })
         .onAppear {
             viewModel.configure(modelContext: modelContext)
-            configureWindow()
-        }
-        .onChange(of: viewModel.isPinned) { _, pinned in
-            setWindowFloating(pinned)
-        }
-        .onChange(of: viewModel.isClickThrough) { _, clickThrough in
-            setWindowClickThrough(clickThrough)
         }
         .onChange(of: viewModel.opacity) { _, opacity in
-            withAnimation(.easeInOut(duration: 0.15)) {
-                setWindowOpacity(opacity)
+            WindowManager.shared.setOpacity(opacity)
+        }
+        .onChange(of: viewModel.isPinned) { _, pinned in
+            WindowManager.shared.setFloating(pinned)
+        }
+        .onChange(of: viewModel.isClickThrough) { _, clickThrough in
+            WindowManager.shared.setClickThrough(clickThrough)
+        }
+        .onChange(of: viewModel.appearance) { _, _ in
+            WindowManager.shared.updateMaterial(for: effectiveColorScheme)
+        }
+        .onChange(of: colorScheme) { _, _ in
+            if viewModel.appearance == .system {
+                WindowManager.shared.updateMaterial(for: effectiveColorScheme)
             }
         }
     }
+}
 
-    // MARK: - Window Configuration
+// MARK: - Window Finder
 
-    private func configureWindow() {
-        guard let window = NSApplication.shared.keyWindow else { return }
-        window.isOpaque = false
-        window.backgroundColor = .clear
-        window.hasShadow = true
-        setWindowOpacity(viewModel.opacity)
-        setWindowFloating(viewModel.isPinned)
-        setWindowClickThrough(viewModel.isClickThrough)
+struct WindowFinder: NSViewRepresentable {
+    let onFound: (NSWindow) -> Void
+
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        DispatchQueue.main.async {
+            if let window = view.window {
+                onFound(window)
+            }
+        }
+        return view
     }
 
-    private func setWindowFloating(_ floating: Bool) {
-        guard let window = NSApplication.shared.keyWindow else { return }
-        window.level = floating ? .floating : .normal
-    }
-
-    private func setWindowClickThrough(_ clickThrough: Bool) {
-        guard let window = NSApplication.shared.keyWindow else { return }
-        window.ignoresMouseEvents = clickThrough
-    }
-
-    private func setWindowOpacity(_ opacity: Double) {
-        guard let window = NSApplication.shared.keyWindow else { return }
-        window.alphaValue = opacity
-    }
+    func updateNSView(_ nsView: NSView, context: Context) {}
 }
