@@ -77,5 +77,6 @@ final class WindowManager {
 
     func setClickThrough(_ clickThrough: Bool) {
         contentWindow?.ignoresMouseEvents = clickThrough
+        backgroundWindow?.ignoresMouseEvents = clickThrough
     }
 }
