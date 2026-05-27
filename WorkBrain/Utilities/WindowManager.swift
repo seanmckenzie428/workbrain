@@ -97,6 +97,19 @@ final class WindowManager {
         contentWindow?.ignoresMouseEvents = clickThrough
         backgroundWindow?.ignoresMouseEvents = clickThrough
         setWindowButtonsHidden(clickThrough)
+        updateFocusState(isFocused: !clickThrough)
+    }
+
+    private func updateFocusState(isFocused: Bool) {
+        guard let visualEffect = backgroundWindow?.contentView?.subviews.first(where: { $0 is NSVisualEffectView }) as? NSVisualEffectView else { return }
+
+        if isFocused {
+            visualEffect.material = .fullScreenUI
+            backgroundWindow?.alphaValue = storedOpacity * 0.85
+        } else {
+            visualEffect.material = .underPageBackground
+            backgroundWindow?.alphaValue = storedOpacity
+        }
     }
 
     func setAppearance(_ colorScheme: ColorScheme) {
@@ -133,9 +146,9 @@ private class GradientAccentView: NSView {
     private func setupGradient() {
         let gradient = CAGradientLayer()
         gradient.colors = [
-            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.12).cgColor,  // #3DB64C at 12%
+            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.18).cgColor,  // #3DB64C at 18%
             NSColor.clear.cgColor,
-            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.06).cgColor   // #3DB64C at 6%
+            NSColor(red: 0.24, green: 0.71, blue: 0.30, alpha: 0.10).cgColor   // #3DB64C at 10%
         ]
         gradient.locations = [0.0, 0.5, 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)   // top-left
