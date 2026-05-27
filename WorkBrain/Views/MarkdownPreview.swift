@@ -14,7 +14,8 @@ struct MarkdownPreview: View {
                     renderLine(line)
                 }
             }
-            .padding(12)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 4)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
