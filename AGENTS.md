@@ -6,6 +6,8 @@
 
 **Development Model**: AI-first development. All code is written by AI agents based on user prompts and feedback. Human does not touch code directly.
 
+**Commit Convention**: Use caveman-commit style. Conventional Commits format, subject ≤50 chars, body only when why isn't obvious. Commit incrementally as changes are made so we can roll back.
+
 ## Technical Requirements
 
 ### Platform

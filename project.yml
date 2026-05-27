@@ -1,0 +1,32 @@
+name: WorkBrain
+options:
+  bundleIdPrefix: com.workbrain
+  deploymentTarget:
+    macOS: "26.0"
+  xcodeVersion: "26.0"
+  minimumXcodeVersion: "26.0"
+  generateEmptyDirectories: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "26.0"
+targets:
+  WorkBrain:
+    type: application
+    platform: macOS
+    sources:
+      - WorkBrain
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.workbrain.app
+        INFOPLIST_KEY_LSApplicationCategoryType: "public.app-category.productivity"
+        CODE_SIGN_ENTITLEMENTS: WorkBrain/WorkBrain.entitlements
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: "WorkBrain"
+        INFOPLIST_KEY_NSHigherProcessLogic: NO
+        ENABLE_PREVIEWS: YES
+    entitlements:
+      path: WorkBrain/WorkBrain.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.files.user-selected.read-only: true

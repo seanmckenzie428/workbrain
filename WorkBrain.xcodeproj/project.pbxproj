@@ -1,0 +1,377 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		232BC73E660C079F88678B27 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E3541924AAAAE397526DCD /* BottomBar.swift */; };
+		2B8793225A293E0BF3658DFB /* WorkBrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2462E8D5A64C52AE3BB239 /* WorkBrainApp.swift */; };
+		34941F6180BFB5D7A7806A4F /* DayBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29626346BB770F624F2899EB /* DayBar.swift */; };
+		349B4D30FFC54666D3D5CA53 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A9646108081AE5ED28483E /* MainViewModel.swift */; };
+		55B4A805F11CD9A91B0877BA /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5A07A57839331058523F4 /* NoteEditor.swift */; };
+		587F4D123A989C39F3E59B3F /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE8AFB7C3CEAB6A676FBC2B /* DateUtils.swift */; };
+		63A12E517DD987AAD9A1D5F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DFA7511DCB7CC3763D59DEB /* Assets.xcassets */; };
+		824C988A5FBC0F3C878F8D9C /* DailyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4326DD724BD24257858B426 /* DailyNote.swift */; };
+		D41CFED615EE94464476A590 /* NoteTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FFCBE68B4C79A9727B8412 /* NoteTemplate.swift */; };
+		E76794793DE9CB6145D82C8F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EEA125AE488215F7C9DCF0 /* ContentView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0DFA7511DCB7CC3763D59DEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		26A9646108081AE5ED28483E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		29626346BB770F624F2899EB /* DayBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBar.swift; sourceTree = "<group>"; };
+		466D6821A27D049F38DCDF9D /* WorkBrain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorkBrain.entitlements; sourceTree = "<group>"; };
+		4B2462E8D5A64C52AE3BB239 /* WorkBrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkBrainApp.swift; sourceTree = "<group>"; };
+		56F5A07A57839331058523F4 /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
+		61E3541924AAAAE397526DCD /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
+		86EEA125AE488215F7C9DCF0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8CE8AFB7C3CEAB6A676FBC2B /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		D4326DD724BD24257858B426 /* DailyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNote.swift; sourceTree = "<group>"; };
+		E87502BADC331AA9A61C8DF9 /* WorkBrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkBrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8FFCBE68B4C79A9727B8412 /* NoteTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTemplate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		34F2AC667B4FB2EB8E37E29B /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		4553BA1C6E4E3F94198D5C2C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				26A9646108081AE5ED28483E /* MainViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		71A9CB9BDD9CCE85785113C4 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8CE8AFB7C3CEAB6A676FBC2B /* DateUtils.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		7E7ACF3E9C90FE36DA0FBC73 = {
+			isa = PBXGroup;
+			children = (
+				CF5FBFD9A10F31CA344925A8 /* WorkBrain */,
+				F2415C24A479476447436A45 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C726164E8ACB7936F4C46605 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				61E3541924AAAAE397526DCD /* BottomBar.swift */,
+				86EEA125AE488215F7C9DCF0 /* ContentView.swift */,
+				29626346BB770F624F2899EB /* DayBar.swift */,
+				56F5A07A57839331058523F4 /* NoteEditor.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CF5FBFD9A10F31CA344925A8 /* WorkBrain */ = {
+			isa = PBXGroup;
+			children = (
+				0DFA7511DCB7CC3763D59DEB /* Assets.xcassets */,
+				466D6821A27D049F38DCDF9D /* WorkBrain.entitlements */,
+				4B2462E8D5A64C52AE3BB239 /* WorkBrainApp.swift */,
+				34F2AC667B4FB2EB8E37E29B /* App */,
+				DA5D35DC2F3EC5AF5F78D05E /* Models */,
+				71A9CB9BDD9CCE85785113C4 /* Utilities */,
+				4553BA1C6E4E3F94198D5C2C /* ViewModels */,
+				C726164E8ACB7936F4C46605 /* Views */,
+			);
+			path = WorkBrain;
+			sourceTree = "<group>";
+		};
+		DA5D35DC2F3EC5AF5F78D05E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D4326DD724BD24257858B426 /* DailyNote.swift */,
+				E8FFCBE68B4C79A9727B8412 /* NoteTemplate.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F2415C24A479476447436A45 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E87502BADC331AA9A61C8DF9 /* WorkBrain.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0EEEB5A42F761AA7C8DC9F86 /* WorkBrain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBD18E282562C6BFE0A4C11C /* Build configuration list for PBXNativeTarget "WorkBrain" */;
+			buildPhases = (
+				9C44D948209FA274AB9C3633 /* Sources */,
+				4621D03838B181DF90D9090E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WorkBrain;
+			packageProductDependencies = (
+			);
+			productName = WorkBrain;
+			productReference = E87502BADC331AA9A61C8DF9 /* WorkBrain.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FB8F9B9C253089F2DF4F8CE6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 6C7D09F1A95345E1E089B97F /* Build configuration list for PBXProject "WorkBrain" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7E7ACF3E9C90FE36DA0FBC73;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F2415C24A479476447436A45 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0EEEB5A42F761AA7C8DC9F86 /* WorkBrain */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4621D03838B181DF90D9090E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63A12E517DD987AAD9A1D5F7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9C44D948209FA274AB9C3633 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				232BC73E660C079F88678B27 /* BottomBar.swift in Sources */,
+				E76794793DE9CB6145D82C8F /* ContentView.swift in Sources */,
+				824C988A5FBC0F3C878F8D9C /* DailyNote.swift in Sources */,
+				587F4D123A989C39F3E59B3F /* DateUtils.swift in Sources */,
+				34941F6180BFB5D7A7806A4F /* DayBar.swift in Sources */,
+				349B4D30FFC54666D3D5CA53 /* MainViewModel.swift in Sources */,
+				55B4A805F11CD9A91B0877BA /* NoteEditor.swift in Sources */,
+				D41CFED615EE94464476A590 /* NoteTemplate.swift in Sources */,
+				2B8793225A293E0BF3658DFB /* WorkBrainApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1FBE13C892A0D04DAD444D18 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WorkBrain/WorkBrain.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WorkBrain;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHigherProcessLogic = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.workbrain.app;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4B01BD21884DECACAB3A71F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		B36BE3D9DEB1249FB0E1C874 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		F938144B4CE3EE153F91B2C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WorkBrain/WorkBrain.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WorkBrain;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHigherProcessLogic = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.workbrain.app;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6C7D09F1A95345E1E089B97F /* Build configuration list for PBXProject "WorkBrain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B36BE3D9DEB1249FB0E1C874 /* Debug */,
+				4B01BD21884DECACAB3A71F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EBD18E282562C6BFE0A4C11C /* Build configuration list for PBXNativeTarget "WorkBrain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FBE13C892A0D04DAD444D18 /* Debug */,
+				F938144B4CE3EE153F91B2C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FB8F9B9C253089F2DF4F8CE6 /* Project object */;
+}
