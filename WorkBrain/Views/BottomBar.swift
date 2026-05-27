@@ -36,7 +36,7 @@ struct BottomBar: View {
 
             // Opacity slider
             HStack(spacing: 8) {
-                Image(systemName: "circle.lefthalf.filled")
+                Image(systemName: "app.background.dotted")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                 Slider(value: $opacity, in: 0.1...1.0, step: 0.05)
