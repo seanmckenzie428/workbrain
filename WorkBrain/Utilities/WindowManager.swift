@@ -79,5 +79,21 @@ final class WindowManager {
     func setClickThrough(_ clickThrough: Bool) {
         contentWindow?.ignoresMouseEvents = clickThrough
         backgroundWindow?.ignoresMouseEvents = clickThrough
+        setWindowButtonsHidden(clickThrough)
+    }
+
+    func setAppearance(_ colorScheme: ColorScheme) {
+        let appearanceName: NSAppearance.Name = colorScheme == .dark ? .darkAqua : .aqua
+        backgroundWindow?.appearance = NSAppearance(named: appearanceName)
+    }
+
+    // MARK: - Window Buttons
+
+    private func setWindowButtonsHidden(_ hidden: Bool) {
+        guard let window = contentWindow else { return }
+        let buttons: [NSWindow.ButtonType] = [.closeButton, .miniaturizeButton, .zoomButton]
+        for type in buttons {
+            window.standardWindowButton(type)?.isHidden = hidden
+        }
     }
 }

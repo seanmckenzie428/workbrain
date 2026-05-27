@@ -50,7 +50,11 @@ struct ContentView: View {
             WindowManager.shared.setOpacity(viewModel.opacity)
             WindowManager.shared.setFloating(viewModel.isPinned)
             WindowManager.shared.setClickThrough(viewModel.isClickThrough)
+            WindowManager.shared.setAppearance(effectiveColorScheme)
         })
+        .onChange(of: effectiveColorScheme) { _, scheme in
+            WindowManager.shared.setAppearance(scheme)
+        }
         .onAppear {
             viewModel.configure(modelContext: modelContext)
         }
