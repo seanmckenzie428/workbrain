@@ -39,7 +39,7 @@ struct DayBar: View {
             }
         }
         .padding(.horizontal, 12)
-        .padding(.vertical, 8)
+        .padding(.vertical, 4)
     }
 }
 
@@ -57,12 +57,12 @@ private struct DayPill: View {
                 .textCase(.uppercase)
                 .foregroundStyle(isSelected ? .white : .primary)
             Text(dayNumber)
-                .font(.title3)
+                .font(.callout)
                 .fontWeight(isSelected ? .bold : .medium)
                 .foregroundStyle(isSelected ? .white : .primary)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 6)
+        .padding(.vertical, 4)
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(isSelected ? Color.accentColor : Color.gray.opacity(0.12))

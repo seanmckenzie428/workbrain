@@ -69,7 +69,6 @@ struct BottomBar: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
-        .background(.ultraThinMaterial)
     }
 
     private func appearanceIcon(for mode: AppAppearance) -> String {
