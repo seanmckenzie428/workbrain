@@ -3,46 +3,23 @@ import SwiftData
 
 @main
 struct WorkBrainApp: App {
+    @StateObject private var viewModel = MainViewModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .background(WindowOpacityObserver())
+            ContentView(viewModel: viewModel)
         }
         .modelContainer(for: [DailyNote.self, NoteTemplate.self])
         .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 800, height: 600)
-    }
-}
+        .commands {
+            CommandMenu("Window") {
+                Toggle("Pin on Top", isOn: $viewModel.isPinned)
+                    .keyboardShortcut("p", modifiers: .command)
 
-/// Helper view that configures the NSWindow for real transparency.
-struct WindowOpacityObserver: View {
-    @Environment(\.viewModelOpacity) private var opacity
-
-    var body: some View {
-        Color.clear
-            .frame(width: 0, height: 0)
-            .onAppear { configureWindow() }
-            .onChange(of: opacity) { _, _ in configureWindow() }
-    }
-
-    private func configureWindow() {
-        guard let window = NSApplication.shared.keyWindow else { return }
-        window.isOpaque = false
-        window.backgroundColor = .clear
-        window.hasShadow = true
-        // Don't override level here — ContentView manages that
-    }
-}
-
-// MARK: - Environment key for opacity
-
-private struct ViewModelOpacityKey: EnvironmentKey {
-    static let defaultValue: Double = 0.95
-}
-
-extension EnvironmentValues {
-    var viewModelOpacity: Double {
-        get { self[ViewModelOpacityKey.self] }
-        set { self[ViewModelOpacityKey.self] = newValue }
+                Toggle("Click Through", isOn: $viewModel.isClickThrough)
+                    .keyboardShortcut("t", modifiers: .command)
+            }
+        }
     }
 }
