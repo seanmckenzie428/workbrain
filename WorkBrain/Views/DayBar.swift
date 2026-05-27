@@ -65,7 +65,7 @@ private struct DayPill: View {
         .padding(.vertical, 4)
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(isSelected ? Color.accentColor : Color.gray.opacity(0.12))
+                .fill(isSelected ? Color.accentColor : Color.clear)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 10)

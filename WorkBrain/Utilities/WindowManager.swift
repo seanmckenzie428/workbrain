@@ -8,6 +8,7 @@ final class WindowManager {
     private weak var contentWindow: NSWindow?
     private var backgroundWindow: NSWindow?
     private var visualEffectView: NSVisualEffectView?
+    private var tintView: NSView?
     private var storedOpacity: Double = 0.95
 
     func setup(for contentWindow: NSWindow) {
@@ -16,14 +17,24 @@ final class WindowManager {
         backgroundWindow?.close()
         self.contentWindow = contentWindow
 
+        let container = NSView(frame: contentWindow.contentView?.bounds ?? .zero)
+        container.autoresizingMask = [.width, .height]
+        container.wantsLayer = true
+        container.layer?.cornerRadius = 10
+        container.layer?.masksToBounds = true
+
         let visualEffect = NSVisualEffectView()
-        visualEffect.material = .popover
+        visualEffect.material = .underWindowBackground
         visualEffect.blendingMode = .behindWindow
         visualEffect.state = .active
-        visualEffect.wantsLayer = true
-        visualEffect.layer?.cornerRadius = 10
-        visualEffect.layer?.masksToBounds = true
         visualEffect.autoresizingMask = [.width, .height]
+
+        let tint = NSView()
+        tint.autoresizingMask = [.width, .height]
+        tint.wantsLayer = true
+
+        container.addSubview(visualEffect)
+        container.addSubview(tint)
 
         let bgWindow = NSWindow(
             contentRect: contentWindow.frame,
@@ -34,7 +45,7 @@ final class WindowManager {
         bgWindow.isOpaque = false
         bgWindow.backgroundColor = .clear
         bgWindow.hasShadow = false
-        bgWindow.contentView = visualEffect
+        bgWindow.contentView = container
         bgWindow.level = contentWindow.level
         bgWindow.alphaValue = storedOpacity
 
@@ -44,6 +55,9 @@ final class WindowManager {
 
         self.backgroundWindow = bgWindow
         self.visualEffectView = visualEffect
+        self.tintView = tint
+
+        updateMaterial(for: .light) // default, will be overridden by ContentView
 
         NotificationCenter.default.addObserver(
             self,
@@ -82,6 +96,11 @@ final class WindowManager {
     }
 
     func updateMaterial(for colorScheme: ColorScheme) {
-        visualEffectView?.material = colorScheme == .dark ? .hudWindow : .popover
+        visualEffectView?.material = .underWindowBackground
+
+        let tintColor: NSColor = colorScheme == .dark
+            ? NSColor(white: 0.1, alpha: 0.6)
+            : NSColor(white: 1.0, alpha: 0.45)
+        tintView?.layer?.backgroundColor = tintColor.cgColor
     }
 }
